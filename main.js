@@ -25,6 +25,20 @@ function createWindow() {
     }]
   }));
 
+  //Create back shortcut
+  menu.append(new MenuItem({
+    label: 'Edit',
+    submenu: [{
+      label: 'Back',
+      accelerator: process.platform === 'darwin' ? 'Cmd+K' : 'Ctrl+K',
+      click: () => {
+        if (win.webContents.canGoBack()){
+          win.webContents.goBack();
+        }
+      }
+    }]
+  }))
+
   Menu.setApplicationMenu(menu);
 }
 
