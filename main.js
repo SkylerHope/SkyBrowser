@@ -23,35 +23,37 @@ function createWindow() {
       return;
     }
 
-    const adBlocking = {
-      urls: data.split('\n')
+    const adPatterns = new Set(
+      data.split('\n')
         .map(line => line.trim())
         .filter(line => line !== '' && !line.startsWith('!') && !line.startsWith('#'))
         .map(line => {
           if (line.startsWith('||')) {
-            return `*://${line.substring(2).replace('^', '').replace(/[^\w\-\.]/g, '')}/*`;
+            return `*.${line.substring(2).replace('^', '').replace(/[^\w\-\.]/g, '')}`;
           } else if (line.startsWith('|')) {
-            return `*://${line.substring(1).replace('^', '').replace(/[^\w\-\.]/g, '')}/*`;
+            return `${line.substring(1).replace('^', '').replace(/[^\w\-\.]/g, '')}`;
           } else if (line.endsWith('^')) {
-            return `*://${line.replace('^', '').replace(/[^\w\-\.]/g, '')}/*`;
+            return `${line.replace('^', '').replace(/[^\w\-\.]/g, '')}`;
           } else {
-            return `*://${line.replace(/[^\w\-\.]/g, '')}/*`;
+            return `${line.replace(/[^\w\-\.]/g, '')}`;
           }
         })
-        .filter(pattern => {
-          try {
-            new URL(pattern.replace('*://', 'http://')); 
-            return true;
-          } catch (e) {
-            console.error('Invalid URL pattern:', pattern);
-            return false;
-          }
-        })
-    };
+    );
 
-    session.defaultSession.webRequest.onBeforeRequest(adBlocking, (details, callback) => {
-      console.log('Blocked: ', details.url);
-      callback({ cancel: true });
+    session.defaultSession.webRequest.onBeforeRequest({ urls: ['<all_urls>'] }, (details, callback) => {
+      const url = new URL(details.url);
+      const hostname = url.hostname;
+      
+      const shouldBlock = Array.from(adPatterns).some(pattern => {
+        return hostname.includes(pattern);
+      });
+
+      if (shouldBlock) {
+        console.log('Blocked:', details.url);
+        callback({ cancel: true });
+      } else {
+        callback({ cancel: false });
+      }
     });
   });
 
