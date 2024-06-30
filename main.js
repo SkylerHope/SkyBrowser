@@ -36,7 +36,17 @@ function createWindow() {
           win.webContents.goBack();
         }
       }
-    }]
+  //Create forward shortcut
+    },
+  {
+    label: 'Forward',
+    accelerator: process.platform === 'darwin' ? 'Cmd+L' : 'Ctrl+L',
+    click: () => {
+      if (win.webContents.canGoForward()){
+        win.webContents.goForward();
+      }
+    }
+  }]
   }))
 
   Menu.setApplicationMenu(menu);
