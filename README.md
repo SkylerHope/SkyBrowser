@@ -19,14 +19,14 @@ There are no current packages available, use with npm for now
 git clone https://github.com/SkylerHope/SkyBrowser.git
 ```
 
-### Usage
+## Usage
 
 ```bash
 cd SkyBrowser
 npm start
 ```
 
-### Update
+## Update
 
 ```bash
 cd SkyBrowser
