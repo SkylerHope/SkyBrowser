@@ -1,4 +1,6 @@
-const { app, BrowserWindow, Menu, MenuItem } = require('electron');
+const { app, BrowserWindow, Menu, MenuItem, session } = require('electron');
+const path = require('path');
+const fs = require('fs');
 
 function createWindow() {
   // Create the browser window.
@@ -13,6 +15,45 @@ function createWindow() {
 
   // Load index.html into the new BrowserWindow.
   win.loadFile('index.html');
+
+  // Create ad blocker
+  fs.readFile(path.join(__dirname, './blocklists/adlist.txt'), 'utf-8', (err, data) => {
+    if (err) {
+      console.error('Failed to load ad blocking list: ', err);
+      return;
+    }
+
+    const adBlocking = {
+      urls: data.split('\n')
+        .map(line => line.trim())
+        .filter(line => line !== '' && !line.startsWith('!') && !line.startsWith('#'))
+        .map(line => {
+          if (line.startsWith('||')) {
+            return `*://${line.substring(2).replace('^', '').replace(/[^\w\-\.]/g, '')}/*`;
+          } else if (line.startsWith('|')) {
+            return `*://${line.substring(1).replace('^', '').replace(/[^\w\-\.]/g, '')}/*`;
+          } else if (line.endsWith('^')) {
+            return `*://${line.replace('^', '').replace(/[^\w\-\.]/g, '')}/*`;
+          } else {
+            return `*://${line.replace(/[^\w\-\.]/g, '')}/*`;
+          }
+        })
+        .filter(pattern => {
+          try {
+            new URL(pattern.replace('*://', 'http://')); 
+            return true;
+          } catch (e) {
+            console.error('Invalid URL pattern:', pattern);
+            return false;
+          }
+        })
+    };
+
+    session.defaultSession.webRequest.onBeforeRequest(adBlocking, (details, callback) => {
+      console.log('Blocked: ', details.url);
+      callback({ cancel: true });
+    });
+  });
 
   // Create home page shortcut
   const menu = new Menu()
