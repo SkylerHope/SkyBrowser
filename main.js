@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu, MenuItem } = require('electron');
 
 function createWindow() {
   // Create the browser window.
@@ -13,6 +13,19 @@ function createWindow() {
 
   // Load index.html into the new BrowserWindow.
   win.loadFile('index.html');
+
+  // Create home page shortcut
+  const menu = new Menu()
+  menu.append(new MenuItem({
+    label: 'File',
+    submenu: [{
+      label: 'Home',
+      accelerator: process.platform === 'darwin' ? 'Cmd+N' : 'Ctrl+N',
+      click: () => { win.loadFile('index.html') }
+    }]
+  }));
+
+  Menu.setApplicationMenu(menu);
 }
 
 // This method will be called when Electron has finished
