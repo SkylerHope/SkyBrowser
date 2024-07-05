@@ -1,6 +1,6 @@
 {
   "name": "skybrowser",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A lightweight web browser",
   "main": "main.js",
   "scripts": {
