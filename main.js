@@ -99,7 +99,7 @@ function createWindow() {
       let link = win.webContents.getURL();
       if(link.endsWith('index.html')) {
         link = "";
-        console.log("ERROR: Cannot copy home page link!");
+        console.log("Cannot copy home page link!");
         clipboard.writeText(link);
       }
       else {
