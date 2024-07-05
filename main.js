@@ -99,6 +99,17 @@ function createWindow() {
       clipboard.writeText(link);
     }
   }]
+  }));
+  //Create inspect element shortcut
+  menu.append(new MenuItem({
+    label: 'Tools',
+    submenu: [{
+      label: 'Inspect',
+      accelerator: process.platform === 'darwin' ? 'Cmd+Shift+I' : 'Ctrl+Shift+I',
+      click: () => {
+        win.webContents.openDevTools({mode: 'right'});
+      }
+    }]
   }))
 
   Menu.setApplicationMenu(menu);
