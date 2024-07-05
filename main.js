@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, MenuItem, session, clipboard } = require('electron');
+const { app, BrowserWindow, Menu, MenuItem, session, clipboard, nativeImage } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
@@ -97,6 +97,16 @@ function createWindow() {
     click: () => {
       const link = win.webContents.getURL();
       clipboard.writeText(link);
+    }
+  //Create copy window as image shortcut
+  },
+  {
+    label: 'Copy as image',
+    accelerator: process.platform === 'darwin' ? 'Cmd+Shift+P' : 'Ctrl+Shift+P',
+    click: () => {
+      win.webContents.capturePage().then(image => {
+        clipboard.writeImage(image);
+      });
     }
   }]
   }));
