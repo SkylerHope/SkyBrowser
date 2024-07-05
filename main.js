@@ -1,6 +1,7 @@
 const { app, BrowserWindow, Menu, MenuItem, session, clipboard, nativeImage } = require('electron');
 const path = require('path');
 const fs = require('fs');
+const { url } = require('inspector');
 
 function createWindow() {
   // Create the browser window.
@@ -95,8 +96,15 @@ function createWindow() {
     label: 'Copy link',
     accelerator: process.platform === 'darwin' ? 'Cmd+Shift+C' : 'Ctrl+Shift+C',
     click: () => {
-      const link = win.webContents.getURL();
-      clipboard.writeText(link);
+      let link = win.webContents.getURL();
+      if(link.endsWith('index.html')) {
+        link = "";
+        console.log("ERROR: Cannot copy home page link!");
+        clipboard.writeText(link);
+      }
+      else {
+        clipboard.writeText(link);
+      }
     }
   //Create copy window as image shortcut
   },
