@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, MenuItem, session } = require('electron');
+const { app, BrowserWindow, Menu, MenuItem, session, clipboard } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
@@ -88,6 +88,15 @@ function createWindow() {
       if (win.webContents.canGoForward()){
         win.webContents.goForward();
       }
+    }
+  //Create copy link shortcut
+  },
+  {
+    label: 'Copy link',
+    accelerator: process.platform === 'darwin' ? 'Cmd+Shift+C' : 'Ctrl+Shift+C',
+    click: () => {
+      const link = win.webContents.getURL();
+      clipboard.writeText(link);
     }
   }]
   }))
