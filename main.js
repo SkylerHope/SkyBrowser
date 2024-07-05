@@ -97,13 +97,13 @@ function createWindow() {
     accelerator: process.platform === 'darwin' ? 'Cmd+Shift+C' : 'Ctrl+Shift+C',
     click: () => {
       let link = win.webContents.getURL();
-      if(link.endsWith('index.html')) {
-        link = "";
-        console.log("Cannot copy home page link!");
-        clipboard.writeText(link);
-      }
-      else {
-        clipboard.writeText(link);
+      switch (true) {
+        case link.endsWith('index.html'):
+          link = "";
+          console.log("Cannot copy home page link!");
+          break;
+        default:
+          clipboard.writeText(link);
       }
     }
   //Create copy window as image shortcut
