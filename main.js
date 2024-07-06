@@ -66,6 +66,12 @@ function createWindow() {
       label: 'Home',
       accelerator: process.platform === 'darwin' ? 'Cmd+N' : 'Ctrl+N',
       click: () => { win.loadFile('index.html') }
+    },
+    //Create quit shortcut
+    {
+      label: 'Quit',
+      accelerator: process.platform === 'darwin' ? 'Cmd+Q' : 'Ctrl+Q',
+      click: () => { app.quit() }
     }]
   }));
 
