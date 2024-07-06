@@ -36,3 +36,12 @@
 .search-items {
     display: inline-block;
 }
+
+#repo-link {
+    margin-top: 140px;
+    text-align: center;
+}
+
+#repo-link a:hover {
+    color: mediumslateblue;
+}
