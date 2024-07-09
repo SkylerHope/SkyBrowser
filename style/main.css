@@ -63,8 +63,3 @@ body {
 .dark-mode a {
     color: #0167ff;
 }
-
-#dark-mode-button {
-    display: flex;
-    justify-content: center;
-}
