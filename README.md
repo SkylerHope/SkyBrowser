@@ -14,7 +14,7 @@ There are no current packages available, use with npm for now
 
 ### Optional Requirements
 
-- xterm (Linux only)
+- xterm (Linux only) - Needed for console log feature on Linux
 
     After the required packages are installed, open a terminal and type the command below
 
