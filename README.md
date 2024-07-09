@@ -1,5 +1,5 @@
 # SkyBrowser
-A minimal and lightweight web browser
+A minimal and lightweight web browser with basic adblocking
 
 ## Installation
 
