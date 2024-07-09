@@ -11,13 +11,14 @@ There are no current packages available, use with npm for now
 - [Git](https://git-scm.com/downloads)
 - [NodeJS](https://nodejs.org/en)
 - npm (Comes with NodeJS on Windows)
-- [Electron](https://www.electronjs.org/)
+- xdg-open (Linux only)
 - xterm (Linux only)
 
     After the required packages are installed, open a terminal and type the command below
 
 ```bash
 git clone https://github.com/SkylerHope/SkyBrowser.git
+npm install
 ```
 
 ## Usage
