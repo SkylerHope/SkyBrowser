@@ -12,6 +12,7 @@ There are no current packages available, use with npm for now
 - [NodeJS](https://nodejs.org/en)
 - npm (Comes with NodeJS on Windows)
 - [Electron](https://www.electronjs.org/)
+- xterm (Linux only)
 
     After the required packages are installed, open a terminal and type the command below
 
