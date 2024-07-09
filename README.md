@@ -18,6 +18,7 @@ There are no current packages available, use with npm for now
 
 ```bash
 git clone https://github.com/SkylerHope/SkyBrowser.git
+cd SkyBrowser
 npm install
 ```
 
