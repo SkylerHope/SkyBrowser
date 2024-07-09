@@ -2,6 +2,8 @@ const { app, BrowserWindow, Menu, MenuItem, session, clipboard, nativeImage } = 
 const path = require('path');
 const fs = require('fs');
 const { url } = require('inspector');
+const { exec } = require('child_process');
+const { exit } = require('process');
 
 function createWindow() {
   // Create the browser window.
@@ -129,6 +131,26 @@ function createWindow() {
       accelerator: process.platform === 'darwin' ? 'Cmd+Shift+I' : 'Ctrl+Shift+I',
       click: () => {
         win.webContents.openDevTools({mode: 'right'});
+      }
+    },
+    //Create open console log shortcut
+    {
+      label: 'Console log',
+      accelerator: process.platform === 'darwin' ? 'Cmd+J' : 'Ctrl+J',
+      click: () => {
+        app.quit();
+        if(process.platform === 'darwin') {
+          exec('osascript -e \'tell application "Terminal" to do script "cd \\"' + __dirname + '\\" && npm start"\'');
+        }
+        else if(process.platform === 'win32') {
+          exec('start cmd.exe /K "cd /d ' + __dirname + ' && npm start"');
+        }
+        else if(process.platform === 'linux') {
+          exec(`xterm -hold -e "cd \\"${__dirname}\\" && npm start"`);
+        }
+        else {
+          console.log("Platform not supported to opem console window!");
+        }
       }
     }]
   }))
