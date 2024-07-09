@@ -109,7 +109,10 @@ function createWindow() {
         link = "";
         console.log("Cannot copy home page link!");
       }
-      clipboard.writeText(link);
+      else {
+        clipboard.writeText(link);
+        console.log("Copied link to clipboard!");
+      }
     }
   //Create copy window as image shortcut
   },
@@ -119,6 +122,7 @@ function createWindow() {
     click: () => {
       win.webContents.capturePage().then(image => {
         clipboard.writeImage(image);
+        console.log("Copied current page as a png image!")
       });
     }
   }]
