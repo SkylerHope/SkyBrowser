@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./style/main.css">
@@ -19,9 +19,11 @@
         </form>
       </div>
     </div>
-    <div id="repo-link">
-      <a href="https://github.com/SkylerHope/SkyBrowser">Github repository</a>
+    <div id="extras">
+      <button id="dark-mode-button">Toggle Dark Mode</button>
+      <a id="repo-link" href="https://github.com/SkylerHope/SkyBrowser">Github repository</a>
     </div>
     <script src="./scripts/search.js"></script>
+    <script src="./scripts/darkmode.js"></script>
   </body>
 </html>

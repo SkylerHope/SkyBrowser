@@ -1,3 +1,7 @@
+body {
+    background-color: whitesmoke;
+}
+
 #title {
     text-align: center;
     margin-top: 80px;
@@ -37,6 +41,11 @@
     display: inline-block;
 }
 
+#extras {
+    display: grid;
+    place-items: center;
+}
+
 #repo-link {
     margin-top: 5px;
     text-align: center;
@@ -44,4 +53,18 @@
 
 #repo-link a:hover {
     color: mediumslateblue;
+}
+
+.dark-mode {
+    background-color: rgb(49, 49, 49);
+    color: whitesmoke;
+}
+
+.dark-mode a {
+    color: #0167ff;
+}
+
+#dark-mode-button {
+    display: flex;
+    justify-content: center;
 }
