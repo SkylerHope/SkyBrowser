@@ -1,5 +1,10 @@
+<div align="center">
+
+<img src="./assets/logo.png" alt="AppLogo" width="80" height="80">
+
 # SkyBrowser
 A minimal and lightweight web browser with basic adblocking
+</div>
 
 ## Installation
 
