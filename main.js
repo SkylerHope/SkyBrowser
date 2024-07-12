@@ -150,7 +150,7 @@ function createWindow() {
           exec('start cmd.exe /K "cd /d ' + __dirname + ' && npm start"');
         }
         else if(process.platform === 'linux') {
-          exec(`xterm -hold -e "cd \\"${__dirname}\\" && npm start"`);
+          exec(`lxterminal -e "cd \\"${__dirname}\\" && npm start"`);
         }
         else {
           console.log("Platform not supported to opem console window!");
