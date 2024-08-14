@@ -11,7 +11,7 @@
 You can test the latet beta AppImage for Linux available [here](https://github.com/SkylerHope/SkyBrowser/releases/tag/beta)
 
 
-### Installation Requirements
+### Development Requirements
 
 - [Git](https://git-scm.com/downloads)
 - [NodeJS](https://nodejs.org/en)
