@@ -5,11 +5,26 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "build": "electron-packager . SkyBrowser --platform=linux --arch=x64 --out=dist/ --overwrite",
+    "dist": "electron-builder",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "devDependencies": {
+    "electron": "^31.1.0",
+    "electron-builder": "^24.13.3",
+    "electron-packager": "^17.1.2"
+  },
+  "build": {
+    "appId": "com.skylerhope.skybrowser",
+    "productName": "SkyBrowser",
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Internet",
+      "icon": "./assets/app_logo.png"
+    }
+  },
   "author": "SkylerHope",
-  "license": "MIT",
-  "dependencies": {
-    "electron": "^31.1.0"
-  }
+  "license": "MIT"
 }
