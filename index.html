@@ -12,12 +12,12 @@
     <title>SkyBrowser</title>
   </head>
   <body>
-    <div id="title">
+    <div id="title" align="center">
       <!--Add logo-->
-      <img src="./assets/logo.png" height="80" width="80">
+      <img src="./assets/logo.png" height="80" width="100" class="logo tauri">
       <!--Add title--> 
       <h2>Search the web with SkyBrowser!</h2>
-      <div class="search-items">
+      <div class="search-items" align="center">
         <form id="search-form">
           <!--Add search bar-->
           <input type="text" id="search-bar" name="search" placeholder="funny cat videos">
@@ -25,14 +25,10 @@
           <button type="submit" id="search-button">Search</button>
         </form>
       </div>
-    </div>
-    <div id="extras">
-      <!--Add dark mode button-->
-      <button id="dark-mode-button">Toggle Dark Mode</button><br/>
-      <!--Add repo link-->
-      <a id="repo-link" href="https://github.com/SkylerHope/SkyBrowser">Github repository</a>
+      <br/><br/>
+      <a href="https://github.com/SkylerHope/SkyBrowser">Github repository</a><br/>
+      <a href="https://github.com/SkylerHope/SkyBrowser/issues/new">Report a bug</a>
     </div>
     <script src="./scripts/search.js"></script>
-    <script src="./scripts/darkmode.js"></script>
   </body>
 </html>
