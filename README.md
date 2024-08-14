@@ -40,5 +40,5 @@ npm start
 
 ```bash
 cd SkyBrowser
-npm start
+git pull
 ```
