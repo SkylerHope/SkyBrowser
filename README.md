@@ -8,7 +8,7 @@
 
 ## Installation
 
-You can test the latet beta AppImage for Linux available [here](https://github.com/SkylerHope/SkyBrowser/releases/tag/beta)
+You can download and test the latest beta AppImage for Linux, available [here](https://github.com/SkylerHope/SkyBrowser/releases/tag/beta)
 
 
 ### Development Requirements
