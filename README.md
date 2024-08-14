@@ -3,7 +3,7 @@
 <img src="./assets/logo.png" alt="AppLogo" width="80" height="80">
 
 # SkyBrowser
-<b>I won't be working on this project anymore, I'm rebuilding it with Tauri <a href="https://github.com/SkylerHope/SkyBrowserV2">here</a></b>
+#### A minimal and lightweight web browser with basic adblocking
 </div>
 
 ## Installation
