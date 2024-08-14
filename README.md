@@ -8,7 +8,7 @@
 
 ## Installation
 
-There are no current packages available, use with npm for now
+You can test the latet beta AppImage for Linux available [here](https://github.com/SkylerHope/SkyBrowser/releases/tag/beta)
 
 
 ### Installation Requirements
