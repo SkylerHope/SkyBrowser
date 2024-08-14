@@ -35,3 +35,10 @@ npm install
 cd SkyBrowser
 npm start
 ```
+
+## Update
+
+```bash
+cd SkyBrowser
+npm start
+```
