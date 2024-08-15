@@ -8,7 +8,7 @@
 
 ## Installation
 
-You can download and test the latest beta for Linux and Windows, available [here](https://github.com/SkylerHope/SkyBrowser/releases/tag/beta-0.2.8)
+You can download and test the latest beta for Linux and Windows, available [here](https://github.com/SkylerHope/SkyBrowser/releases/tag/beta-0.2.9)
 
 
 ### Development Requirements
