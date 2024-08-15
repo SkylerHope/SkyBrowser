@@ -1,11 +1,12 @@
 {
   "name": "skybrowser",
-  "version": "0.2.6",
-  "description": "A lightweight web browser",
+  "version": "0.2.7",
+  "description": "A minimal and lightweight web browser",
+  "icon": "./assets/logo.png",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . SkyBrowser --platform=linux --arch=x64 --out=dist/ --overwrite",
+    "build": "electron-packager . SkyBrowser --out=dist/ --overwrite",
     "dist": "electron-builder",
     "dist-win": "electron-builder --win",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,7 +24,14 @@
         "AppImage"
       ],
       "category": "Internet",
-      "icon": "./assets/app_logo.png"
+      "icon": "./assets/256x256.png"
+    },
+    "win": {
+      "icon": "./assets/app_logo_win.ico",
+      "target": [
+        "nsis",
+        "portable"
+      ]
     }
   },
   "author": "SkylerHope",
