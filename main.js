@@ -136,23 +136,6 @@ function createWindow() {
       click: () => {
         win.webContents.openDevTools({mode: 'right'});
       }
-    },
-    //Create open console log shortcut
-    {
-      label: 'Console log',
-      accelerator: process.platform === 'darwin' ? 'Cmd+J' : 'Ctrl+J',
-      click: () => {
-        app.quit();
-        if(process.platform === 'win32') {
-          exec('start cmd.exe /K "cd /d ' + __dirname + ' && npm start"');
-        }
-        else if(process.platform === 'linux') {
-          exec(`lxterminal -e "cd \\"${__dirname}\\" && npm start"`);
-        }
-        else {
-          console.log("Platform not supported to opem console window!");
-        }
-      }
     }]
   }))
 
