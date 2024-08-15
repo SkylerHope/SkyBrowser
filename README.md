@@ -8,7 +8,7 @@
 
 ## Installation
 
-You can download and test the latest beta for Linux and Windows, available [here](https://github.com/SkylerHope/SkyBrowser/releases/tag/beta-0.2.7)
+You can download and test the latest beta for Linux and Windows, available [here](https://github.com/SkylerHope/SkyBrowser/releases/tag/beta-0.2.8)
 
 
 ### Development Requirements
@@ -16,10 +16,6 @@ You can download and test the latest beta for Linux and Windows, available [here
 - [Git](https://git-scm.com/downloads)
 - [NodeJS](https://nodejs.org/en)
 - npm (Comes with NodeJS on Windows)
-
-### Optional Requirements
-
-- LXTerminal (Linux only) - Needed for console log feature on Linux
 
     After the required packages are installed, open a terminal and type the command below
 
