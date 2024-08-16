@@ -103,35 +103,3 @@ button {
 button:active {
   background-color: #0f0f0f69;
 }
-
-#tab-field {
-  width: 100%;
-  height: 24.7px;
-  background-color: #0f0f0f98;
-  display: flex;
-  align-items: flex-start;
-}
-
-#new-tab {
-  color: #0f0f0f;
-  background-color:gainsboro;
-  width: 12%;
-  cursor: default;
-  margin: 0;
-}
-
-#new-tab:active {
-  background-color: whitesmoke;
-}
-
-#add-tab {
-  margin-left: 10px;
-}
-
-#add-tab:hover {
-  opacity: 60%;
-}
-
-#add-tab:active {
-  opacity: 100%;
-}

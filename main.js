@@ -81,6 +81,14 @@ function createWindow() {
   menu.append(new MenuItem({
     label: 'Edit',
     submenu: [{
+      //Create reload shortcut
+      label: 'Reload',
+      accelerator: process.platform === 'darwin' ? 'Cmd+R' : 'Ctrl+R',
+      click: () => {
+        win.webContents.reload();
+      }
+    },
+    {
       label: 'Back',
       accelerator: process.platform === 'darwin' ? 'Cmd+K' : 'Ctrl+K',
       click: () => {
