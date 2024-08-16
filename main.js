@@ -12,7 +12,7 @@ function createWindow() {
     height: 500,
     icon: './assets/logo.png',
     webPreferences: {
-      nodeIntegration: true,
+      nodeIntegration: false,
     },
   });
 
