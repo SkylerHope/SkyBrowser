@@ -11,6 +11,7 @@ function createWindow() {
     width: 800,
     height: 500,
     icon: './assets/logo.png',
+    autoHideMenuBar: false,
     webPreferences: {
       nodeIntegration: false,
     },
@@ -147,6 +148,8 @@ function createWindow() {
   }))
 
   Menu.setApplicationMenu(menu);
+
+  win.setFullScreenable(false);
 }
 
 // This method will be called when Electron has finished
