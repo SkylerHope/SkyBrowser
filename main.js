@@ -17,6 +17,8 @@ function createWindow() {
     },
   });
 
+  // Maximize the window by default
+  win.maximize();
   // Load index.html into the new BrowserWindow.
   win.loadFile('index.html');
 
