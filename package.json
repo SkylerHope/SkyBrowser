@@ -21,7 +21,8 @@
     "productName": "SkyBrowser",
     "linux": {
       "target": [
-        "AppImage"
+        "AppImage",
+        "deb"
       ],
       "category": "Internet",
       "icon": "./assets/256x256.png"
@@ -33,6 +34,10 @@
       ]
     }
   },
-  "author": "SkylerHope",
+  "author": {
+    "name": "SkylerHope",
+    "email": "uz86hpgji@mozmail.com",
+    "url": "https://github.com/SkylerHope"
+  },
   "license": "MIT"
 }
