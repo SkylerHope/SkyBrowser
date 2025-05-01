@@ -150,14 +150,28 @@ function createWindow() {
       label: 'Print page to PDF',
       accelerator: process.platform === 'darwin' ? 'Cmd+P' : 'Ctrl+P',
       click: () => {
-        const pdfPath = path.join(os.homedir(), 'Desktop', 'page.pdf');
+        const baseName = 'page';
+        const ext = '.pdf';
+        const desktopDir = path.join(os.homedir(), 'Desktop');
+
+        function getFilePath(basePath, baseName, ext) {
+          let counter = 0;
+          let candidate = path.join(basePath, `${baseName}${ext}`);
+          while(fs.existsSync(candidate)) {
+            counter++;
+            candidate = path.join(basePath, `${baseName}(${counter})${ext}`);
+          }
+          return candidate;
+        }
+        const pdfPath = getFilePath(desktopDir, baseName, ext);
+
         win.webContents.printToPDF({}).then(data => {
           fs.writeFile(pdfPath, data, (error) => {
-            if (error) throw error
-            console.log(`Wrote PDF successfully to ${pdfPath}`)
+            if (error) throw error;
+            console.log(`Wrote PDF successfully to ${pdfPath}`);
           });
         }).catch(error => {
-          console.log(`Failed to write PDF to ${pdfPath}: `, error)
+          console.log(`Failed to write PDF to ${pdfPath}: `, error);
         });
       }
     }]
