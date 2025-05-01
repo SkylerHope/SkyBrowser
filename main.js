@@ -148,7 +148,7 @@ function createWindow() {
     // Create print shortcut
     {
       label: 'Print page to PDF',
-      accelerator: process.platform === 'darwin' ? 'Cmd+P' : 'Ctrl+P',
+      //accelerator: process.platform === 'darwin' ? 'Cmd+P' : 'Ctrl+P',
       click: () => {
         const baseName = 'page';
         const ext = '.pdf';
