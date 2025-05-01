@@ -103,3 +103,13 @@ button {
 button:active {
   background-color: #0f0f0f69;
 }
+
+#patchtext:hover {
+  cursor: pointer;
+}
+
+#patchnotes {
+  width: 10%;
+  border-radius: 10%;
+  background-color: #0f0f0f69;
+}
