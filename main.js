@@ -1,6 +1,7 @@
-const { app, BrowserWindow, Menu, MenuItem, session, clipboard, nativeImage } = require('electron');
+const { app, BrowserWindow, session, clipboard, nativeImage, Menu, MenuItem } = require('electron');
 const path = require('path');
 const fs = require('fs');
+const os = require('node:os');
 const { url } = require('inspector');
 const { exec } = require('child_process');
 const { exit } = require('process');
@@ -69,7 +70,7 @@ function createWindow() {
     label: 'File',
     submenu: [{
       label: 'Home',
-      accelerator: process.platform === 'darwin' ? 'Cmd+N' : 'Ctrl+N',
+      accelerator: process.platform === 'darwin' ? 'Cmd+H' : 'Ctrl+H',
       click: () => { win.loadFile('index.html') }
     },
     //Create quit shortcut
@@ -89,24 +90,27 @@ function createWindow() {
       accelerator: process.platform === 'darwin' ? 'Cmd+R' : 'Ctrl+R',
       click: () => {
         win.webContents.reload();
+        console.log('Reloaded current page!');
       }
     },
     {
       label: 'Back',
-      accelerator: process.platform === 'darwin' ? 'Cmd+K' : 'Ctrl+K',
+      accelerator: process.platform === 'darwin' ? 'Cmd+B' : 'Ctrl+B',
       click: () => {
         if (win.webContents.canGoBack()){
           win.webContents.goBack();
+          console.log('Went back!');
         }
       }
   //Create forward shortcut
     },
   {
     label: 'Forward',
-    accelerator: process.platform === 'darwin' ? 'Cmd+L' : 'Ctrl+L',
+    accelerator: process.platform === 'darwin' ? 'Cmd+F' : 'Ctrl+F',
     click: () => {
       if (win.webContents.canGoForward()){
         win.webContents.goForward();
+        console.log('Went forward!')
       }
     }
   //Create copy link shortcut
@@ -127,27 +131,49 @@ function createWindow() {
   //Create copy window as image shortcut
   },
   {
-    label: 'Copy as image',
+    label: 'Copy as picture',
     accelerator: process.platform === 'darwin' ? 'Cmd+Shift+P' : 'Ctrl+Shift+P',
     click: () => {
       win.webContents.capturePage().then(image => {
         clipboard.writeImage(image);
-        console.log("Copied current page as a png image!")
+        console.log("Copied current page as a png image!");
       });
     }
   }]
+  }));
+  //Create view category
+  menu.append(new MenuItem({
+    label: 'View',
+    submenu: [
+    // Create print shortcut
+    {
+      label: 'Print page to PDF',
+      accelerator: process.platform === 'darwin' ? 'Cmd+P' : 'Ctrl+P',
+      click: () => {
+        const pdfPath = path.join(os.homedir(), 'Desktop', 'page.pdf');
+        win.webContents.printToPDF({}).then(data => {
+          fs.writeFile(pdfPath, data, (error) => {
+            if (error) throw error
+            console.log(`Wrote PDF successfully to ${pdfPath}`)
+          });
+        }).catch(error => {
+          console.log(`Failed to write PDF to ${pdfPath}: `, error)
+        });
+      }
+    }]
   }));
   //Create inspect element shortcut
   menu.append(new MenuItem({
     label: 'Tools',
     submenu: [{
       label: 'Inspect',
-      accelerator: process.platform === 'darwin' ? 'Cmd+Shift+I' : 'Ctrl+Shift+I',
+      accelerator: process.platform === 'darwin' ? 'Cmd+I' : 'Ctrl+I',
       click: () => {
         win.webContents.openDevTools({mode: 'right'});
+        console.log('Opened inspect pannel');
       }
     }]
-  }))
+  }));
 
   Menu.setApplicationMenu(menu);
 
