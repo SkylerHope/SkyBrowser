@@ -1,4 +1,4 @@
-const { app, BrowserWindow, session, clipboard, nativeImage, Menu, MenuItem } = require('electron');
+const { app, BrowserWindow, session, clipboard, nativeImage, Menu, MenuItem, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const os = require('node:os');
@@ -14,7 +14,7 @@ function createWindow() {
     icon: './assets/logo.png',
     autoHideMenuBar: false,
     webPreferences: {
-      nodeIntegration: false,
+      nodeIntegration: false
     },
   });
 
@@ -169,9 +169,19 @@ function createWindow() {
           fs.writeFile(pdfPath, data, (error) => {
             if (error) throw error;
             console.log(`Wrote PDF successfully to ${pdfPath}`);
+            dialog.showMessageBox({
+              title: 'Success!',
+              type: 'info',
+              message: `PDF saved at ${pdfPath}`
+            });
           });
         }).catch(error => {
           console.log(`Failed to write PDF to ${pdfPath}: `, error);
+          dialog.showMessageBox({
+            title: 'Error!',
+            type: 'error',
+            message: `Failed to save PDF at ${pdfPath}`
+          });
         });
       }
     }]
