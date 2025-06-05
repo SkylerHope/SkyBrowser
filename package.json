@@ -3,7 +3,7 @@
   "version": "0.3.7",
   "description": "A minimal and lightweight web browser",
   "icon": "./assets/logo.png",
-  "main": "main.js",
+  "main": "main.mjs",
   "scripts": {
     "start": "electron .",
     "build": "electron-packager . SkyBrowser --out=dist/ --overwrite",
@@ -41,8 +41,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "adblock-rs": "^0.9.8",
-    "cargo-cp-artifact": "^0.1.9",
+    "@ghostery/adblocker-electron": "^2.6.1",
+    "@ghostery/adblocker-webextension": "^2.6.1",
+    "cross-fetch": "^4.1.0",
+    "fetch": "^1.1.0",
     "jest": "^29.7.0"
   }
 }
