@@ -1,10 +1,12 @@
-const { app, BrowserWindow, session, clipboard, nativeImage, Menu, MenuItem, dialog } = require('electron');
-const path = require('path');
-const fs = require('fs');
-const os = require('node:os');
-const { url } = require('inspector');
-const { exec } = require('child_process');
-const { exit } = require('process');
+import { app, BrowserWindow, session, clipboard, nativeImage, Menu, MenuItem, dialog } from 'electron';
+import { ElectronBlocker } from '@ghostery/adblocker-electron';
+import fetch from 'cross-fetch';
+import path from 'path';
+import fs from 'fs';
+import os from 'node:os';
+import { url } from 'inspector';
+import { exec } from 'child_process';
+import { exit } from 'process';
 
 function createWindow() {
   // Create the browser window.
@@ -22,47 +24,6 @@ function createWindow() {
   win.maximize();
   // Load index.html into the new BrowserWindow.
   win.loadFile('index.html');
-
-  // Create ad blocker
-  fs.readFile(path.join(__dirname, './blocklists/adlist.txt'), 'utf-8', (err, data) => {
-    if (err) {
-      console.error('Failed to load ad blocking list: ', err);
-      return;
-    }
-
-    const adPatterns = new Set(
-      data.split('\n')
-        .map(line => line.trim())
-        .filter(line => line !== '' && !line.startsWith('!') && !line.startsWith('#'))
-        .map(line => {
-          if (line.startsWith('||')) {
-            return `*.${line.substring(2).replace('^', '').replace(/[^\w\-\.]/g, '')}`;
-          } else if (line.startsWith('|')) {
-            return `${line.substring(1).replace('^', '').replace(/[^\w\-\.]/g, '')}`;
-          } else if (line.endsWith('^')) {
-            return `${line.replace('^', '').replace(/[^\w\-\.]/g, '')}`;
-          } else {
-            return `${line.replace(/[^\w\-\.]/g, '')}`;
-          }
-        })
-    );
-
-    session.defaultSession.webRequest.onBeforeRequest({ urls: ['<all_urls>'] }, (details, callback) => {
-      const url = new URL(details.url);
-      const hostname = url.hostname;
-      
-      const shouldBlock = Array.from(adPatterns).some(pattern => {
-        return hostname.includes(pattern);
-      });
-
-      if (shouldBlock) {
-        console.log('Blocked:', details.url);
-        callback({ cancel: true });
-      } else {
-        callback({ cancel: false });
-      }
-    });
-  });
 
   // Create home page shortcut
   const menu = new Menu()
@@ -206,7 +167,12 @@ function createWindow() {
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
-app.whenReady().then(createWindow);
+app.whenReady().then(async () => {
+  ElectronBlocker.fromPrebuiltAdsAndTracking(fetch).then((blocker) => {
+  blocker.enableBlockingInSession(session.defaultSession);
+});
+  createWindow();
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
