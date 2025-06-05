@@ -1,6 +1,6 @@
 {
   "name": "skybrowser",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "A minimal and lightweight web browser",
   "icon": "./assets/logo.png",
   "main": "main.mjs",
