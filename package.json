@@ -39,5 +39,8 @@
     "email": "uz86hpgji@mozmail.com",
     "url": "https://github.com/SkylerHope"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "jest": "^29.7.0"
+  }
 }
