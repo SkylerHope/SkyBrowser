@@ -8,6 +8,12 @@ import { url } from 'inspector';
 import { exec } from 'child_process';
 import { exit } from 'process';
 
+function enableAdblock() {
+  ElectronBlocker.fromPrebuiltAdsAndTracking(fetch).then((blocker) => {
+  blocker.enableBlockingInSession(session.defaultSession);
+  });
+}
+
 function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
@@ -165,12 +171,8 @@ function createWindow() {
   win.setFullScreenable(false);
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
 app.whenReady().then(async () => {
-  ElectronBlocker.fromPrebuiltAdsAndTracking(fetch).then((blocker) => {
-  blocker.enableBlockingInSession(session.defaultSession);
-});
+  enableAdblock();
   createWindow();
 });
 
