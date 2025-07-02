@@ -26,7 +26,7 @@ function createWindow() {
     },
 });
 
-function savePageAsPDF(){
+function savePageAsPDF() {
   const baseName = 'page';
   const ext = '.pdf';
   const desktopDir = path.join(os.homedir(), 'Desktop');
@@ -59,6 +59,17 @@ function savePageAsPDF(){
       message: `Failed to save PDF at ${pdfPath}`
     });
   });
+}
+
+function copyLink() {
+  let link = win.webContents.getURL();
+  if(link.match('index.html')) {
+    console.log("Cannot copy home page link!");
+  }
+  else {
+    clipboard.writeText(link);
+    console.log("Copied link to clipboard!");
+  }
 }
 
   // Maximize the window by default
@@ -121,14 +132,7 @@ function savePageAsPDF(){
     label: 'Copy link',
     accelerator: process.platform === 'darwin' ? 'Cmd+Shift+C' : 'Ctrl+Shift+C',
     click: () => {
-      let link = win.webContents.getURL();
-      if(link.match('index.html')) {
-        console.log("Cannot copy home page link!");
-      }
-      else {
-        clipboard.writeText(link);
-        console.log("Copied link to clipboard!");
-      }
+      copyLink();
     }
   //Create copy window as image shortcut
   },
