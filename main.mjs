@@ -24,7 +24,42 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: false
     },
+});
+
+function savePageAsPDF(){
+  const baseName = 'page';
+  const ext = '.pdf';
+  const desktopDir = path.join(os.homedir(), 'Desktop');
+
+  function getFilePath(basePath, baseName, ext) {
+    let counter = 0;
+    let candidate = path.join(basePath, `${baseName}${ext}`);
+    while(fs.existsSync(candidate)) {
+      counter++;
+      candidate = path.join(basePath, `${baseName}(${counter})${ext}`);
+    }
+    return candidate;
+  }
+  const pdfPath = getFilePath(desktopDir, baseName, ext);
+  win.webContents.printToPDF({}).then(data => {
+    fs.writeFile(pdfPath, data, (error) => {
+      if (error) throw error;
+      console.log(`Wrote PDF successfully to ${pdfPath}`);
+      dialog.showMessageBox({
+        title: 'Success!',
+        type: 'info',
+        message: `PDF saved at ${pdfPath}`
+      });
+    });
+  }).catch(error => {
+    console.log(`Failed to write PDF to ${pdfPath}: `, error);
+    dialog.showMessageBox({
+      title: 'Error!',
+      type: 'error',
+      message: `Failed to save PDF at ${pdfPath}`
+    });
   });
+}
 
   // Maximize the window by default
   win.maximize();
@@ -117,39 +152,7 @@ function createWindow() {
       label: 'Print page to PDF',
       //accelerator: process.platform === 'darwin' ? 'Cmd+P' : 'Ctrl+P',
       click: () => {
-        const baseName = 'page';
-        const ext = '.pdf';
-        const desktopDir = path.join(os.homedir(), 'Desktop');
-
-        function getFilePath(basePath, baseName, ext) {
-          let counter = 0;
-          let candidate = path.join(basePath, `${baseName}${ext}`);
-          while(fs.existsSync(candidate)) {
-            counter++;
-            candidate = path.join(basePath, `${baseName}(${counter})${ext}`);
-          }
-          return candidate;
-        }
-        const pdfPath = getFilePath(desktopDir, baseName, ext);
-
-        win.webContents.printToPDF({}).then(data => {
-          fs.writeFile(pdfPath, data, (error) => {
-            if (error) throw error;
-            console.log(`Wrote PDF successfully to ${pdfPath}`);
-            dialog.showMessageBox({
-              title: 'Success!',
-              type: 'info',
-              message: `PDF saved at ${pdfPath}`
-            });
-          });
-        }).catch(error => {
-          console.log(`Failed to write PDF to ${pdfPath}: `, error);
-          dialog.showMessageBox({
-            title: 'Error!',
-            type: 'error',
-            message: `Failed to save PDF at ${pdfPath}`
-          });
-        });
+        savePageAsPDF();
       }
     }]
   }));
