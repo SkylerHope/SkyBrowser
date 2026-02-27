@@ -1,6 +1,6 @@
 {
   "name": "skybrowser",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "A minimal and lightweight web browser",
   "icon": "./assets/logo.png",
   "main": "main.mjs",
@@ -24,7 +24,7 @@
         "AppImage",
         "deb"
       ],
-      "category": "Internet",
+      "category": "Network;",
       "icon": "./assets/256x256.png"
     },
     "win": {
