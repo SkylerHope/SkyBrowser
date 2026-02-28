@@ -19,7 +19,7 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 500,
-    icon: './assets/logo.png',
+    icon: './assets/512x512.png',
     autoHideMenuBar: false,
     webPreferences: {
       nodeIntegration: false
